@@ -19,10 +19,7 @@ class _SplashScreenState extends State<SplashScreen> {
   _navigatetoHome() async {
     await Future.delayed(Duration(milliseconds: 1500), () {});
     Navigator.pushReplacement(
-        context, MaterialPageRoute(
-        builder: (context) => WelcomeScreen()
-      )
-    );
+        context, MaterialPageRoute(builder: (context) => WelcomeScreen()));
   }
 
   @override
@@ -33,7 +30,7 @@ class _SplashScreenState extends State<SplashScreen> {
           width: double.infinity,
           height: double.infinity,
           decoration: BoxDecoration(
-            color: Colors.blueGrey.shade200,
+            color: Colors.white,
           ),
           child: Center(
             child: Text(
