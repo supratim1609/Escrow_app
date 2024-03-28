@@ -18,7 +18,7 @@ class _HomeScreenState extends State<HomeScreen> {
         elevation: 0,
         centerTitle: true,
         title: Text(
-          "Dash Board",
+          "Dashboard",
           style: GoogleFonts.sanchez(
             fontSize: 24,
             fontWeight: FontWeight.bold,
@@ -35,14 +35,147 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
-      body: Stack(
-        fit: StackFit.expand,
+      body: ListView(
         children: [
+          SizedBox(height: AppBar().preferredSize.height), // Spacer for AppBar
           Container(
-            decoration: BoxDecoration(
-              color: Colors.white,
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  "Current Balance",
+                  style: GoogleFonts.sanchez(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  "\$200345",
+                  style: GoogleFonts.sanchez(
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                SizedBox(height: 16),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        padding:
+                            EdgeInsets.symmetric(vertical: 8, horizontal: 18),
+                        backgroundColor: Colors.black,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                      onPressed: () {},
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(Icons.upload_outlined),
+                          SizedBox(width: 8),
+                          Text(
+                            "Send",
+                            style: GoogleFonts.sanchez(
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        padding:
+                            EdgeInsets.symmetric(vertical: 8, horizontal: 22),
+                        backgroundColor: Colors.black,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                      onPressed: () {},
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(Icons.download_outlined),
+                          SizedBox(width: 8),
+                          Text(
+                            "Receive",
+                            style: GoogleFonts.sanchez(
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        padding:
+                            EdgeInsets.symmetric(vertical: 8, horizontal: 22),
+                        backgroundColor: Colors.black,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                      onPressed: () {},
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(Icons.add),
+                          SizedBox(width: 8),
+                          Text(
+                            "Buy",
+                            style: GoogleFonts.sanchez(
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 15,
+                ),
+                Container(
+                  padding: EdgeInsets.symmetric(vertical: 8, horizontal: 18),
+                  child: Text(
+                    "Recent Transactions",
+                    style: GoogleFonts.sanchez(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                    ),
+                  ),
+                ),
+                Container(
+                  padding: EdgeInsets.symmetric(vertical: 8, horizontal: 18),
+                  height: 800,
+                  child: ListView.builder(
+                    itemCount: 10,
+                    itemBuilder: (context, index) {
+                      return ListTile(
+                        title: Text(
+                          "Item $index",
+                          style: GoogleFonts.sanchez(
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                )
+              ],
             ),
-            child: Center(child: Text("the amount")),
           ),
         ],
       ),
