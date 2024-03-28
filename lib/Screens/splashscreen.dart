@@ -35,7 +35,7 @@ class _SplashScreenState extends State<SplashScreen> {
           child: Center(
             child: Text(
               "Escrow App",
-              style: GoogleFonts.sanchez(
+              style: GoogleFonts.poppins(
                 fontSize: 30,
                 fontWeight: FontWeight.bold,
               ),

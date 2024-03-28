@@ -1,3 +1,4 @@
+import 'package:escrow_app/Screens/profilescreen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -19,14 +20,21 @@ class _HomeScreenState extends State<HomeScreen> {
         centerTitle: true,
         title: Text(
           "Dashboard",
-          style: GoogleFonts.sanchez(
+          style: GoogleFonts.poppins(
             fontSize: 24,
             fontWeight: FontWeight.bold,
           ),
         ),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              showModalBottomSheet(
+                context: context,
+                builder: (BuildContext context) {
+                  return ProfileScreen(); // Call the bottom sheet content class
+                },
+              );
+            },
             icon: Icon(
               Icons.account_circle_rounded,
               color: Colors.black,
@@ -45,26 +53,26 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
                 Text(
                   "Current Balance",
-                  style: GoogleFonts.sanchez(
+                  style: GoogleFonts.poppins(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 Text(
                   "\$200345",
-                  style: GoogleFonts.sanchez(
+                  style: GoogleFonts.poppins(
                     fontSize: 30,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 SizedBox(height: 16),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         padding:
-                            EdgeInsets.symmetric(vertical: 8, horizontal: 18),
+                            EdgeInsets.symmetric(vertical: 8, horizontal: 30),
                         backgroundColor: Colors.black,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
@@ -78,7 +86,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           SizedBox(width: 8),
                           Text(
                             "Send",
-                            style: GoogleFonts.sanchez(
+                            style: GoogleFonts.poppins(
                               fontSize: 14,
                               fontWeight: FontWeight.bold,
                               color: Colors.white,
@@ -90,7 +98,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         padding:
-                            EdgeInsets.symmetric(vertical: 8, horizontal: 22),
+                            EdgeInsets.symmetric(vertical: 8, horizontal: 30),
                         backgroundColor: Colors.black,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
@@ -104,33 +112,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           SizedBox(width: 8),
                           Text(
                             "Receive",
-                            style: GoogleFonts.sanchez(
-                              fontSize: 14,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        padding:
-                            EdgeInsets.symmetric(vertical: 8, horizontal: 22),
-                        backgroundColor: Colors.black,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
-                      onPressed: () {},
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(Icons.add),
-                          SizedBox(width: 8),
-                          Text(
-                            "Buy",
-                            style: GoogleFonts.sanchez(
+                            style: GoogleFonts.poppins(
                               fontSize: 14,
                               fontWeight: FontWeight.bold,
                               color: Colors.white,
@@ -148,7 +130,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   padding: EdgeInsets.symmetric(vertical: 8, horizontal: 18),
                   child: Text(
                     "Recent Transactions",
-                    style: GoogleFonts.sanchez(
+                    style: GoogleFonts.poppins(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
                       color: Colors.black,
@@ -164,7 +146,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       return ListTile(
                         title: Text(
                           "Item $index",
-                          style: GoogleFonts.sanchez(
+                          style: GoogleFonts.poppins(
                             fontSize: 12,
                             fontWeight: FontWeight.bold,
                             color: Colors.black,
