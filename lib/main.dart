@@ -1,24 +1,27 @@
 import 'package:flutter/material.dart';
-
+import 'package:provider/provider.dart';
+import 'package:escrow_app/utils/routes.dart';
 import 'Screens/splashscreen.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+     const MyApp(),
+  );
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key}) : super(key: key);
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: true,
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         useMaterial3: true,
       ),
-      home: SplashScreen(),
+      home: const SplashScreen(),
     );
   }
 }
