@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:escrow_app/utils/routes.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'dart:developer';
 
 class TransactionScreen extends StatefulWidget {
   const TransactionScreen({Key? key}) : super(key: key);
@@ -9,22 +10,212 @@ class TransactionScreen extends StatefulWidget {
   State<TransactionScreen> createState() => _TransactionScreenState();
 }
 
-class _TransactionScreenState extends State<TransactionScreen> {
+class _TransactionScreenState extends State<TransactionScreen>
+    with SingleTickerProviderStateMixin {
+  late TabController _tabController;
+
   @override
   void initState() {
     super.initState();
-    // Set up listener for back button press
-    WidgetsBinding.instance?.addPostFrameCallback((_) {
-      // Override the back button behavior
-      WillPopScope(
-        onWillPop: () async {
-          // Navigate back to the HomeScreen
-          Navigator.pushNamed(context, RouteNames.dashboard);
-          return true; // Return true to allow pop operation
-        },
-        child: Container(),
-      );
-    });
+    _tabController = TabController(length: 2, vsync: this);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          'Transactions Screen',
+          style: GoogleFonts.poppins(
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        bottom: TabBar(
+          controller: _tabController,
+          tabs: [
+            Tab(
+              child: Text(
+                'Queue',
+                style: GoogleFonts.poppins(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
+            Tab(
+              child: Text(
+                'History',
+                style: GoogleFonts.poppins(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+      body: TabBarView(
+        controller: _tabController,
+        children: [
+          QueueTab(),
+          HistoryTab(),
+        ],
+      ),
+    );
+  }
+}
+
+class QueueTab extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Container(
+            padding: EdgeInsets.symmetric(vertical: 8, horizontal: 18),
+            child: Text(
+              "Approvals pending",
+              style: GoogleFonts.poppins(
+                fontSize: 18,
+                fontWeight: FontWeight.w600,
+                color: Colors.black,
+              ),
+            ),
+          ),
+          SizedBox(height: 20),
+          ListView.builder(
+            shrinkWrap: true,
+            physics: NeverScrollableScrollPhysics(),
+            itemCount: 10,
+            itemBuilder: (context, index) {
+              IconData iconData;
+              Color color;
+              String subText;
+              if (index % 2 == 0) {
+                iconData = Icons.arrow_downward_sharp;
+                color = Colors.green;
+                subText = 'Successful';
+              } else {
+                iconData = Icons.arrow_upward_sharp;
+                color = Colors.red;
+                subText = 'Approval required';
+              }
+              return InkWell(
+                onTap: () {},
+                child: ListTile(
+                  leading: Icon(
+                    iconData,
+                    color: color,
+                  ),
+                  title: Text(
+                    "Transaction $index",
+                    style: GoogleFonts.poppins(
+                      fontSize: 16,
+                      fontWeight: FontWeight.normal,
+                      color: Colors.black,
+                    ),
+                  ),
+                  subtitle: Text(
+                    subText,
+                    style: TextStyle(
+                      color: Colors.grey,
+                    ),
+                  ),
+                  trailing: Text(
+                    "\$50.00", // Sample amount, you can customize this
+                    style: GoogleFonts.poppins(
+                      fontSize: 16,
+                      fontWeight: FontWeight.normal,
+                      color: Colors.black,
+                    ),
+                  ),
+                ),
+              );
+            },
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class HistoryTab extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Container(
+            padding: EdgeInsets.symmetric(vertical: 8, horizontal: 18),
+            child: Text(
+              "Transaction History",
+              style: GoogleFonts.poppins(
+                fontSize: 18,
+                fontWeight: FontWeight.w600,
+                color: Colors.black,
+              ),
+            ),
+          ),
+          SizedBox(height: 20),
+          ListView.builder(
+            shrinkWrap: true,
+            physics: NeverScrollableScrollPhysics(),
+            itemCount: 10,
+            itemBuilder: (context, index) {
+              IconData iconData;
+              Color color;
+              String subText;
+              if (index % 2 == 0) {
+                iconData = Icons.arrow_downward_sharp;
+                color = Colors.green;
+                subText = 'John doe';
+              } else {
+                iconData = Icons.arrow_upward_sharp;
+                color = Colors.red;
+                subText = 'John doe';
+              }
+              return InkWell(
+                onTap: () {
+                  // Open modal bottom sheet with transaction details
+                  _showTransactionDetails(context, index);
+                },
+                child: ListTile(
+                  leading: Icon(
+                    iconData,
+                    color: color,
+                  ),
+                  title: Text(
+                    "Transaction $index",
+                    style: GoogleFonts.poppins(
+                      fontSize: 16,
+                      fontWeight: FontWeight.normal,
+                      color: Colors.black,
+                    ),
+                  ),
+                  subtitle: Text(
+                    subText,
+                    style: TextStyle(
+                      color: Colors.grey,
+                    ),
+                  ),
+                  trailing: Text(
+                    "\$50.00", // Sample amount, you can customize this
+                    style: GoogleFonts.poppins(
+                      fontSize: 16,
+                      fontWeight: FontWeight.normal,
+                      color: Colors.black,
+                    ),
+                  ),
+                ),
+              );
+            },
+          ),
+        ],
+      ),
+    );
   }
 
   void _showTransactionDetails(BuildContext context, int index) {
@@ -109,93 +300,6 @@ class _TransactionScreenState extends State<TransactionScreen> {
           ),
         );
       },
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Transactions Screen',
-          style: GoogleFonts.poppins(
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              padding: EdgeInsets.symmetric(vertical: 8, horizontal: 18),
-              child: Text(
-                "Transaction History",
-                style: GoogleFonts.poppins(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.black,
-                ),
-              ),
-            ),
-            SizedBox(height: 20),
-            Expanded(
-              child: ListView.builder(
-                itemCount: 10,
-                itemBuilder: (context, index) {
-                  IconData iconData;
-                  Color color;
-                  String subText;
-                  if (index % 2 == 0) {
-                    iconData = Icons.arrow_downward_sharp; // Different icon for even indices
-                    color = Colors.green; // Different color for even indices
-                    subText = 'John doe'; // Subtext for even indices
-                  } else {
-                    iconData = Icons.arrow_upward_sharp; // Different icon for odd indices
-                    color = Colors.red; // Different color for odd indices
-                    subText = 'John doe'; // Subtext for odd indices
-                  }
-                  return InkWell(
-                    onTap: () {
-                      // Open modal bottom sheet with transaction details
-                      _showTransactionDetails(context, index);
-                    },
-                    child: ListTile(
-                      leading: Icon(
-                        iconData,
-                        color: color,
-                      ),
-                      title: Text(
-                        "Transaction $index",
-                        style: GoogleFonts.poppins(
-                          fontSize: 16,
-                          fontWeight: FontWeight.normal,
-                          color: Colors.black,
-                        ),
-                      ),
-                      subtitle: Text(
-                        subText,
-                        style: TextStyle(
-                          color: Colors.grey,
-                        ),
-                      ),
-                      trailing: Text(
-                        "\$50.00", // Sample amount, you can customize this
-                        style: GoogleFonts.poppins(
-                          fontSize: 16,
-                          fontWeight: FontWeight.normal,
-                          color: Colors.black,
-                        ),
-                      ),
-                    ),
-                  );
-                },
-              ),
-            ),
-          ],
-        ),
-      ),
     );
   }
 }
