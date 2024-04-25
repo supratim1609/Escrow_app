@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class SettingScreen extends StatefulWidget {
   const SettingScreen({Key? key}) : super(key: key);
@@ -29,10 +30,26 @@ class _SettingScreenState extends State<SettingScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Settings Screen'),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios),
+          onPressed: () => Navigator.pushNamed(context, '/dashboard'),
+        ),
+        title: Text(
+          'Settings Screen',
+          style: GoogleFonts.poppins(
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
       ),
       body: Center(
-        child: Text('This is the Settings Screen'),
+        child: Text(
+          'This is the Settings Screen',
+          style: GoogleFonts.poppins(
+            fontSize: 18,
+            // fontWeight: FontWeight.bold,
+          ),
+        ),
       ),
     );
   }

@@ -24,6 +24,10 @@ class _TransactionScreenState extends State<TransactionScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios),
+          onPressed: () => Navigator.pushNamed(context, '/dashboard'),
+        ),
         title: Text(
           'Transactions Screen',
           style: GoogleFonts.poppins(
