@@ -1,16 +1,55 @@
-# escrow_app
+# Escrow App
 
-A new Flutter project.
+## Overview
+The Escrow App is a secure transaction platform designed to facilitate safe exchanges between buyers and sellers. It ensures that funds are held in escrow until both parties fulfill their commitments, preventing fraud and disputes.
 
-## Getting Started
+## Features
+- **Secure Escrow Transactions** – Funds are held securely until conditions are met.
+- **User Authentication** – Secure login and verification using Firebase Auth / OAuth.
+- **Multi-Party Agreement** – Transactions require mutual confirmation before release.
+- **Dispute Resolution** – In-app dispute handling for failed transactions.
+- **Notifications** – Real-time transaction updates via push notifications.
+- **Transaction History** – View detailed records of past transactions.
 
-This project is a starting point for a Flutter application.
+## Tech Stack
+- **Framework**: Flutter (Dart)
+- **State Management**: Riverpod / Provider
+- **Database**: Firebase Firestore / PostgreSQL
+- **Authentication**: Firebase Auth 
+- **Notifications**: Firebase Cloud Messaging (FCM)
+- **Cloud Functions**: Firebase Functions for backend logic
+- **Navigation**: GoRouter
 
-A few resources to get you started if this is your first Flutter project:
+## Installation
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/yourusername/escrow-app.git
+   ```
+2. Navigate to the project directory:
+   ```sh
+   cd escrow-app
+   ```
+3. Install dependencies:
+   ```sh
+   flutter pub get
+   ```
+4. Run the app:
+   ```sh
+   flutter run
+   ```
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## How It Works
+1. **Create an Escrow Transaction** – A buyer initiates a transaction.
+2. **Hold Agreement Securely** – The escrow system records the agreement until both parties confirm fulfillment.
+3. **Confirm & Close** – Upon confirmation from both parties, the transaction is marked as complete.
+4. **Dispute Handling** – If a dispute arises, the app provides a resolution mechanism.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Contributing
+Pull requests are welcome! Follow best practices for coding and documentation.
+
+## License
+MIT License. See `LICENSE` for details.
+
+---
+
+
